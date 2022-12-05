@@ -113,7 +113,7 @@ export default {
   },
   mixpanel: {
     auth: {
-      token: 'a197f1dc2315b408f241e9dd737a438e'
+      token: '213c80fb81a8391743e51df15e73ba8e'
     },
     groupingEnabled: equals('true', process.env.MIXPANEL_GROUPING_ENABLED)
   },

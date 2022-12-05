@@ -1,9 +1,12 @@
-// import test from 'ava'
+import test from 'ava'
 // import { createRealMixpanelClient } from '../../../util/client/mixpanel'
-import mixpanelIntegration, { conditionallyAddUserAlias, trackEvent, testTrackEvent, conditionallyAddUserToGroup } from './index'
+// import mixpanelIntegration, { conditionallyAddUserAlias, trackEvent, testTrackEvent, conditionallyAddUserToGroup } from './index'
+import createEventClient from '../../../main'
+// import Mixpanel from 'mixpanel'
+// const Mixpanel  = require('mixpanel')
+
 // import config from '../../config'
 
-const mixpanel = require('mixpanel');
 
 // test.beforeEach(t => {
 //   const createFakeMixpanelClient = () => ({
@@ -43,27 +46,32 @@ const mixpanel = require('mixpanel');
 //   t.snapshot(res)
 // })
 
-test('Check test trackEvent is working', t => {
+test('Check test trackEvent is working', async t => {
   // const { mixpanelData } = t.context
+
+  const eventClient = createEventClient({ environment: 'test' })
   const mixpanelData = {
-    distinct_id: 'PackageTester419',
-    name: 'Packager',
+    distinctId: 'PackageTester419',
+    name: 'Test Packager',
     purpose: 'Events Manager'
   }
-  const mixpanelClient = mixpanel.init('213c80fb81a8391743e51df15e73ba8e');
-  console.log(mixpanelClient);
-  const res = mixpanelClient.track('Event Tester', mixpanelData)
-  console.log(res);
+  eventClient.mixpanelEvent(mixpanelData)
+  // console.log('---res', res)
+  t.truthy(true)
+  // const mixpanelClient = mixpanel.init('213c80fb81a8391743e51df15e73ba8e');
+  // console.log(mixpanelClient);
+  // const res = mixpanelClient.track('Event Tester', mixpanelData)
+  // console.log(res);
   // const res = testTrackEvent({ mixpanelClient })(mixpanelData)
-  t.snapshot(res)
+  // t.snapshot(res)
 })
 
-// const Mixpanel = require('mixpanel');
 
-// const mixpanelClient = Mixpanel.init('a197f1dc2315b408f241e9dd737a438e');
+// const mixpanelClient = Mixpanel.init('7476ec39e7409c331c8cc14178735fa8');
+// console.log('mixpanelClient', mixpanelClient);
 
-// const res = mixpanelClient.track('Packager', {
-//     distinct_id: 'Tester001',
+// const res = mixpanelClient.track('Packager 02', {
+//   distinct_id: 'Tester001',
 //     name: 'Tester',
 //     purpose: 'Events Manager'
 // });
@@ -83,13 +91,13 @@ test('Check test trackEvent is working', t => {
 // })
 
 
-const mixpanelData = {
-  distinct_id: 'PackageTester419',
-  name: 'Packager',
-  purpose: 'Events Manager'
-}
-const mixpanelClient = mixpanel.init('213c80fb81a8391743e51df15e73ba8e');
-console.log(mixpanelClient);
-const track = trackEvent({ mixpanelClient })(mixpanelData);
+// const mixpanelData = {
+//   distinct_id: 'PackageTester419',
+//   name: 'Packager',
+//   purpose: 'Events Manager'
+// }
+// const mixpanelClient = mixpanel.init('213c80fb81a8391743e51df15e73ba8e');
+// console.log(mixpanelClient);
+// const track = trackEvent({ mixpanelClient })(mixpanelData);
 // const res = mixpanelClient.track('Event Tester', mixpanelData)
 // console.log(res);

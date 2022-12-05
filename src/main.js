@@ -1,30 +1,17 @@
 
-import { composeWith, then } from '@meltwater/phi'
-import createLogger from 'util/logger'
+// import { composeWith, then } from '@meltwater/phi'
+// import createLogger from 'util/logger'
+import { trackEvent } from '../src/lib/integrations/mixpanel'
 
-const log = createLogger('integtrations:index')
+// const log = createLogger('integtrations:index')
 
-const asyncTap = (prefix) => async (context) => {
-  log(prefix, context.data)
-  return context
-}
+// const asyncTap = (prefix) => async (context) => {
+//   log(prefix, context.data)
+//   return context
+// }
 
-export default ({
-  pushToMixpanel,
-  validateEventConfiguration,
-//   pushToSegment,
-//   pushToSentry,
-//   pushToSlack,
-//   pushToStatuspage,
-//   pushToCrisp
-}) => composeWith(then)([
-//   pushToCrisp,
-//   pushToStatuspage,
-  pushToMixpanel,
-  asyncTap('Before pushing to mixpanel'),
-//   pushToSlack,
-//   asyncTap('Before pushing to slack'),
-//   pushToSentry,
-//   pushToSegment,
-  validateEventConfiguration
-])
+const createEventClient = ({ environment = 'test' }) => ({
+  mixpanelEvent: trackEvent
+})
+
+export default createEventClient

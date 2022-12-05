@@ -2,6 +2,7 @@ import { when, always, path, pathOr, isNotNilOrEmpty, isTrue, split } from '@mel
 import flatten from 'flat'
 import { success } from 'awaiting'
 import { createRealMixpanelClient } from '../../../util/client/mixpanel'
+import config from '../../../lib/config'
 
 /*
 Case 1 Dealership onboarding - create group
@@ -60,9 +61,11 @@ export const conditionallyAddUserToGroup = ({ mixpanelClient }) => async data =>
   )({})
 }
 
-export const trackEvent = ({ mixpanelClient }) => async data => {
-  const { name } = data
-  const distinctId = pathOr('sd-default-distinct-id', tp('metadata.integrations.mixpanel.userId'), data)
+export const trackEvent = async data => {
+  const mixpanelClient = createRealMixpanelClient({ config })
+  console.log('---mixpanel client', mixpanelClient)
+  const { name, distinctId } = data
+  console.log('name, distinctId', name, distinctId)
   const mixpaneldata = flatten(data)
   mixpanelClient.track(name, {
     distinct_id: distinctId,
