@@ -1,0 +1,29 @@
+{
+  "name": "simple-dealer-events-manager",
+  "version": "1.0.0",
+  "description": "",
+  "module": "src/main.js",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "yarn run lint; ava",
+    "lint": "standard",
+    "scripts": "npx babel-node src/lib/integrations/mixpanel/test.js"
+  },
+  "author": "Simple-Dealer",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5",
+    "@meltwater/phi": "^5.0.0",
+    "awaiting": "^3.0.0",
+    "babel-node": "^0.0.1-security",
+    "crisp-api": "^7.1.0",
+    "esm": "^3.2.25",
+    "flat": "^5.0.2",
+    "mixpanel": "^0.17.0"
+  },
+  "devDependencies": {
+    "ava": "^3.15.0",
+    "standard": "^17.0.0"
+  }
+}
